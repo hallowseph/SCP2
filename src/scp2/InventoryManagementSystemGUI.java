@@ -2,7 +2,6 @@ package scp2;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
