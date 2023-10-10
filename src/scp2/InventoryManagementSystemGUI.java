@@ -1,11 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package scp2;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -42,20 +39,23 @@ public class InventoryManagementSystemGUI {
         JButton sellButton = new JButton("5.Sell product (Sell a relevant quantity of an existing product");
         JButton exitButton = new JButton("6.Exit program");
         
+        
         //Action listeners to the buttons
-        /*
+        displayButton.addActionListener(new DisplayStockAction());
+        addButton.addActionListener(new AddProductAction());
+        removeButton.addActionListener(new RemoveProductAction());
+        buyButton.addActionListener(new BuyProductAction());
+        sellButton.addActionListener(new SellProductAction());
+        exitButton.addActionListener(new ExitAction());
         
         
         
         
-        
-        
-        */
         
         //Add components to the panel
         panel.add(welcomeLabel);
         panel.add(displayButton);
-        panel.add(buyButton);
+        panel.add(addButton);
         panel.add(removeButton);
         panel.add(buyButton);
         panel.add(sellButton);
