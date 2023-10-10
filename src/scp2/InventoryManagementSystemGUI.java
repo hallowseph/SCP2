@@ -16,7 +16,7 @@ import javax.swing.JPanel;
  *
  * @author xxg8089
  */
-public class GUI {
+public class InventoryManagementSystemGUI {
     public static void main(String[] args) {
         //Main frame
         JFrame frame = new JFrame();
