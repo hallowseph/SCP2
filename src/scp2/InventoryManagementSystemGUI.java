@@ -48,10 +48,6 @@ public class InventoryManagementSystemGUI {
         sellButton.addActionListener(new SellProductAction());
         exitButton.addActionListener(new ExitAction());
         
-        
-        
-        
-        
         //Add components to the panel
         panel.add(welcomeLabel);
         panel.add(displayButton);
