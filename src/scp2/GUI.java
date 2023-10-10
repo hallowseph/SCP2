@@ -8,7 +8,7 @@ package scp2;
  *
  * @author josep
  */
-public class SCP2 {
+public class GUI {
 
     /**
      * @param args the command line arguments
