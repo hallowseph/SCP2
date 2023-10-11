@@ -12,7 +12,6 @@ public class ExitAction implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Exit");
+        System.exit(0);
     }
-    
 }
