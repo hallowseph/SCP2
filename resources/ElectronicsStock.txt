@@ -1,0 +1,4 @@
+Name,SKUCode,Quantity,DateAcquired
+TV,TV789,2,Thu Apr 14 16:00:00 NZST 2022
+Laptop,LAP123,2,Mon Jun 20 16:00:00 NZST 2022
+Smartphone,SHN456,5,Wed May 25 16:00:00 NZST 2022

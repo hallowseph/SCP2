@@ -7,6 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -26,10 +28,20 @@ public class InventoryManagementSystemGUI {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
         
-        //Label for welcome message
+        //Labels
         JLabel welcomeLabel = new JLabel("Welcome to the Inventory Management System");
         welcomeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JLabel stockLabel = new JLabel("Current Stock:");
         
+        
+        //TextArea
+        JTextArea stockTextArea = new JTextArea(20,40);
+        stockTextArea.setEditable(false);
+        
+        //ScrollPane
+        JScrollPane scrollPane = new JScrollPane(stockTextArea);
+        frame.add(scrollPane, BorderLayout.SOUTH);
+                
         //Buttons for the options
         JButton displayButton = new JButton("1.Display current stock");
         JButton addButton = new JButton("2.Add product type");
@@ -40,7 +52,7 @@ public class InventoryManagementSystemGUI {
         
         
         //Action listeners to the buttons
-        displayButton.addActionListener(new DisplayStockAction());
+        displayButton.addActionListener(new DisplayStockAction(stockTextArea));
         addButton.addActionListener(new AddProductAction());
         removeButton.addActionListener(new RemoveProductAction());
         buyButton.addActionListener(new BuyProductAction());
