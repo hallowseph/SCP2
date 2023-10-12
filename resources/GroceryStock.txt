@@ -1,4 +1,5 @@
 Name,ExpirationDate,Quantity,DateAcquired
 Apples,Sat Mar 23 17:00:00 NZDT 2024,10,Thu Jul 21 16:00:00 NZST 2022
 Milk,Sun Jun 02 17:00:00 NZST 2024,3,Thu Jul 28 16:00:00 NZST 2022
+Sanitizer,Fri Oct 27 23:37:56 NZDT 2023,0,Thu Oct 12 23:37:56 NZDT 2023
 Bread,Mon May 15 17:00:00 NZST 2023,5,Mon Aug 15 16:00:00 NZST 2022

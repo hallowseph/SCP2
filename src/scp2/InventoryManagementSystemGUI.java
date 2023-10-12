@@ -16,6 +16,7 @@ import javax.swing.JTextArea;
  */
 public class InventoryManagementSystemGUI {
     public static void main(String[] args) {
+        InventoryManager inventoryManager = new InventoryManager();
         //Main frame
         JFrame frame = new JFrame();
         frame.setTitle("Inventory Management System");
@@ -35,11 +36,11 @@ public class InventoryManagementSystemGUI {
         
         
         //TextArea
-        JTextArea stockTextArea = new JTextArea(20,40);
-        stockTextArea.setEditable(false);
+        JTextArea textArea = new JTextArea(20,40);
+        textArea.setEditable(false);
         
         //ScrollPane
-        JScrollPane scrollPane = new JScrollPane(stockTextArea);
+        JScrollPane scrollPane = new JScrollPane(textArea);
         frame.add(scrollPane, BorderLayout.SOUTH);
                 
         //Buttons for the options
@@ -52,8 +53,8 @@ public class InventoryManagementSystemGUI {
         
         
         //Action listeners to the buttons
-        displayButton.addActionListener(new DisplayStockAction(stockTextArea));
-        addButton.addActionListener(new AddProductAction());
+        displayButton.addActionListener(new DisplayStockAction(textArea));
+        addButton.addActionListener(new AddProductAction(inventoryManager,textArea));
         removeButton.addActionListener(new RemoveProductAction());
         buyButton.addActionListener(new BuyProductAction());
         sellButton.addActionListener(new SellProductAction());
