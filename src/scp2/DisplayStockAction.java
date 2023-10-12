@@ -17,9 +17,13 @@ import javax.swing.JTextArea;
 public class DisplayStockAction implements ActionListener {
 
         private JTextArea textArea;
+        private List<Product> groceryProducts;
+        private List<Product> electronicsProducts;
         
         public DisplayStockAction(JTextArea textArea){
             this.textArea = textArea;
+            this.groceryProducts = new ArrayList<>();
+            this.electronicsProducts = new ArrayList<>();
         }
         
     @Override
@@ -30,7 +34,8 @@ public class DisplayStockAction implements ActionListener {
         
         //Read and display  Grocery products
         Map<Product, Date> groceryStockMap = fileHandler.readGroceryStock("C:\\Users\\josep\\Documents\\NetBeansProjects\\SCP2\\resources\\GroceryStock.txt");
-        List<Product> groceryProducts = new ArrayList<>(groceryStockMap.keySet());
+        groceryProducts.clear();
+        groceryProducts.addAll(groceryStockMap.keySet());
         groceryProducts.sort((product1,product2) ->{
             if(product1 instanceof GroceryProduct && product2 instanceof GroceryProduct){
                 String name1 = ((GroceryProduct) product1).getName().toLowerCase();
@@ -51,7 +56,8 @@ public class DisplayStockAction implements ActionListener {
         
         //Read and display Electronics products
         Map<Product, Date> electronicsStockMap = fileHandler.readElectronicsStock("C:\\Users\\josep\\Documents\\NetBeansProjects\\SCP2\\resources\\ElectronicsStock.txt");
-        List<Product> electronicsProducts = new ArrayList<>(electronicsStockMap.keySet());
+        electronicsProducts.clear();
+        electronicsProducts.addAll(electronicsStockMap.keySet());
         electronicsProducts.sort((product1,product2) ->{
             if(product1 instanceof ElectronicsProduct && product2 instanceof ElectronicsProduct){
                 String name1 = ((ElectronicsProduct) product1).getName().toLowerCase();
