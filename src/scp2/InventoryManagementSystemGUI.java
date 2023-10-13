@@ -32,8 +32,6 @@ public class InventoryManagementSystemGUI {
         //Labels
         JLabel welcomeLabel = new JLabel("Welcome to the Inventory Management System");
         welcomeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        JLabel stockLabel = new JLabel("Current Stock:");
-        
         
         //TextArea
         JTextArea textArea = new JTextArea(20,40);
