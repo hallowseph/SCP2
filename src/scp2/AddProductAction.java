@@ -53,15 +53,6 @@ public class AddProductAction implements ActionListener {
                     
                     //Display the newly added product
                     SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
-                    //textArea.append("Added Product - Name: " + productToAdd.getName());
-                    
-//                    if(productToAdd instanceof GroceryProduct){
-//                        textArea.append(", Expiration Date: " + dateFormat.format(((GroceryProduct) productToAdd).getExpirationDate()));
-//                    } else if(productToAdd instanceof ElectronicsProduct){
-//                        textArea.append(", SKU Code: " + ((ElectronicsProduct) productToAdd).getSkuCode());
-//                    }
-                    
-                    //textArea.append(", Quantity: " + productToAdd.getQuantity() + "\n");
                     
                     //Save the stock data to text files
                     inventoryManager.saveStockToFile();
