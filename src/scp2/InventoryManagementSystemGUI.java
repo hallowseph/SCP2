@@ -47,7 +47,7 @@ public class InventoryManagementSystemGUI {
         JButton displayButton = new JButton("1.Display current stock");
         JButton addButton = new JButton("2.Add product type");
         JButton removeButton = new JButton("3.Remove product type");
-        JButton buyButton = new JButton("4.Buy product (Acquire more of am existing product");
+        JButton buyButton = new JButton("4.Buy product (Acquire more of an existing product)");
         JButton sellButton = new JButton("5.Sell product (Sell a relevant quantity of an existing product");
         JButton exitButton = new JButton("6.Exit program");
         
@@ -56,7 +56,7 @@ public class InventoryManagementSystemGUI {
         displayButton.addActionListener(new DisplayStockAction(textArea));
         addButton.addActionListener(new AddProductAction(inventoryManager,textArea));
         removeButton.addActionListener(new RemoveProductAction(inventoryManager, textArea));
-        buyButton.addActionListener(new BuyProductAction());
+        buyButton.addActionListener(new BuyProductAction(inventoryManager, textArea));
         sellButton.addActionListener(new SellProductAction());
         exitButton.addActionListener(new ExitAction());
         
