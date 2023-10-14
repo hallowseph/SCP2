@@ -54,7 +54,7 @@ public class InventoryManagementSystemGUI {
         displayButton.addActionListener(new DisplayStockAction(textArea));
         addButton.addActionListener(new AddProductAction(inventoryManager,textArea));
         removeButton.addActionListener(new RemoveProductAction(inventoryManager, textArea));
-        buyButton.addActionListener(new BuyProductAction());
+        buyButton.addActionListener(new BuyProductAction(inventoryManager, textArea));
         sellButton.addActionListener(new SellProductAction());
         exitButton.addActionListener(new ExitAction());
         
