@@ -55,7 +55,7 @@ public class InventoryManagementSystemGUI {
         addButton.addActionListener(new AddProductAction(inventoryManager,textArea));
         removeButton.addActionListener(new RemoveProductAction(inventoryManager, textArea));
         buyButton.addActionListener(new BuyProductAction(inventoryManager, textArea));
-        sellButton.addActionListener(new SellProductAction());
+        sellButton.addActionListener(new SellProductAction(inventoryManager, textArea));
         exitButton.addActionListener(new ExitAction());
         
         //Add components to the panel
