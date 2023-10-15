@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class InventoryManager implements Action {
 
@@ -94,10 +95,11 @@ public class InventoryManager implements Action {
             int currentQuantity = existingProduct.getQuantity();
             existingProduct.setQuantity(currentQuantity + quantity); //add to existing quantity instead of over-writing it
             // adds a new transaction with all arguments you would expect to desribe a transaction (barring price as this is not a feature of inventory management in our case)
-            transactions.add(new Transaction(existingProduct, TransactionType.BUY, quantity)); 
-            System.out.println(quantity + " " + existingProduct.getName() + "(s) bought. Current quantity: " + existingProduct.getQuantity());
+            String successMessage = quantity + " " + existingProduct.getName() + "(s) bought. Currenty quantity: " +  existingProduct.getQuantity();
+            JOptionPane.showMessageDialog(null, successMessage, "Buy Product", JOptionPane.INFORMATION_MESSAGE);
+       
         } else {
-            System.out.println("Product not found in stock.");
+            JOptionPane.showMessageDialog(null, "Product not found in stock.", "Buy Product Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -108,12 +110,15 @@ public class InventoryManager implements Action {
             if (currentQuantity >= quantity) {
                 existingProduct.setQuantity(currentQuantity - quantity);
                 transactions.add(new Transaction(existingProduct, TransactionType.SELL, quantity));
-                System.out.println(quantity + " " + existingProduct.getName() + "(s) sold. Current quantity: " + existingProduct.getQuantity());
+                
+               String successMessage = quantity + " " + existingProduct.getName() + "(s) sold. Current quantity: " + existingProduct.getQuantity();
+               JOptionPane.showMessageDialog(null, successMessage, "Sell Product", JOptionPane.INFORMATION_MESSAGE);
+               
             } else {
-                System.out.println("Insufficient stock of " + existingProduct.getName() + " to sell.");
+                JOptionPane.showMessageDialog(null, "Insufficient stock of " + existingProduct.getName() + " to sell.", "Sell Product Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            System.out.println("Product not found in stock.");
+            JOptionPane.showMessageDialog(null, "Product not found in stock.", "Sell Product Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
