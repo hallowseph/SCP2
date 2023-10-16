@@ -2,6 +2,8 @@ package scp2;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Font;
+import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,24 +25,34 @@ public class InventoryManagementSystemGUI {
         frame.setSize(700,600);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
         
         //Panel for welcome message and options
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
+        JPanel panel = new JPanel(new BorderLayout());
         
-        //Labels
+        //Welcome Label
         JLabel welcomeLabel = new JLabel("Welcome to the Inventory Management System");
-        welcomeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        welcomeLabel.setHorizontalAlignment(JLabel.CENTER);
         
-        //TextArea
+        //Larger font for the welcome message
+        Font welcomeFont = new Font("Arial", Font.BOLD, 24);
+        welcomeLabel.setFont(welcomeFont);
+        
+        panel.add(welcomeLabel, BorderLayout.NORTH);
+        
+        //Text area for stock display
         JTextArea textArea = new JTextArea(20,40);
         textArea.setEditable(false);
-        
-        //ScrollPane
         JScrollPane scrollPane = new JScrollPane(textArea);
-        frame.add(scrollPane, BorderLayout.SOUTH);
-                
+        panel.add(scrollPane, BorderLayout.CENTER);
+        
+        //Font for the text in the JTextArea
+        Font textAreaFont = new Font("Arial", Font.PLAIN, 14);
+        textArea.setFont(textAreaFont);
+        
+        //Panel for buttons in a grid layout
+        JPanel buttonPanel = new JPanel (new GridLayout(3,3,10,10));
+        panel.add(buttonPanel, BorderLayout.SOUTH);
+        
         //Buttons for the options
         JButton displayButton = new JButton("1.Display current stock");
         JButton addButton = new JButton("2.Add product type");
@@ -49,6 +61,14 @@ public class InventoryManagementSystemGUI {
         JButton sellButton = new JButton("5.Sell product (Sell a relevant quantity of an existing product");
         JButton exitButton = new JButton("6.Exit program");
         
+        //font for the buttons
+        Font buttonFont = new Font("Arial", Font.PLAIN, 16);
+        displayButton.setFont(buttonFont);
+        addButton.setFont(buttonFont);
+        removeButton.setFont(buttonFont);
+        buyButton.setFont(buttonFont);
+        sellButton.setFont(buttonFont);
+        exitButton.setFont(buttonFont);
         
         //Action listeners to the buttons
         displayButton.addActionListener(new DisplayStockAction(textArea));
@@ -58,17 +78,16 @@ public class InventoryManagementSystemGUI {
         sellButton.addActionListener(new SellProductAction(inventoryManager, textArea));
         exitButton.addActionListener(new ExitAction());
         
-        //Add components to the panel
-        panel.add(welcomeLabel);
-        panel.add(displayButton);
-        panel.add(addButton);
-        panel.add(removeButton);
-        panel.add(buyButton);
-        panel.add(sellButton);
-        panel.add(exitButton);
-        
-        //Add the panel to the frame
-        frame.add(panel,BorderLayout.CENTER);
+        //Add buttons to the button panel
+        buttonPanel.add(displayButton);
+        buttonPanel.add(addButton);
+        buttonPanel.add(removeButton);
+        buttonPanel.add(buyButton);
+        buttonPanel.add(sellButton);
+        buttonPanel.add(exitButton);
+                
+        //Add the main panel to the frame
+        frame.add(panel);
         
         //Make the frame visible
         frame.setVisible(true);
