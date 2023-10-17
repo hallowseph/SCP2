@@ -54,12 +54,12 @@ public class InventoryManagementSystemGUI {
         panel.add(buttonPanel, BorderLayout.SOUTH);
         
         //Buttons for the options
-        JButton displayButton = new JButton("1.Display current stock");
-        JButton addButton = new JButton("2.Add product type");
-        JButton removeButton = new JButton("3.Remove product type");
-        JButton buyButton = new JButton("4.Buy product (Acquire more of am existing product");
-        JButton sellButton = new JButton("5.Sell product (Sell a relevant quantity of an existing product");
-        JButton exitButton = new JButton("6.Exit program");
+        JButton displayButton = new JButton("Display current stock");
+        JButton addButton = new JButton("Add product type");
+        JButton removeButton = new JButton("Remove product type");
+        JButton buyButton = new JButton("Buy product (Acquire more of am existing product");
+        JButton sellButton = new JButton("Sell product (Sell a relevant quantity of an existing product");
+        JButton exitButton = new JButton("Exit program");
         
         //font for the buttons
         Font buttonFont = new Font("Arial", Font.PLAIN, 16);
