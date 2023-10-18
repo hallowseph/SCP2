@@ -2,80 +2,64 @@ package scp2;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JTextArea;
 
 /**
  *
- * @author josep
- * @author xxg8089
+ * @author joseph,xxg8089
+ * 
  */
 public class DisplayStockAction implements ActionListener {
-
         private JTextArea textArea;
-        private List<Product> groceryProducts;
-        private List<Product> electronicsProducts;
         
         public DisplayStockAction(JTextArea textArea){
             this.textArea = textArea;
-            this.groceryProducts = new ArrayList<>();
-            this.electronicsProducts = new ArrayList<>();
         }
         
     @Override
     public void actionPerformed(ActionEvent e) {
-        textArea.setText("");
-        //Read the data from text files
-        FileHandler fileHandler = new FileHandler();
-        
-        //Read and display  Grocery products
-        Map<Product, Date> groceryStockMap = fileHandler.readGroceryStock("C:\\Users\\josep\\Documents\\NetBeansProjects\\SCP2\\resources\\GroceryStock.txt");
-        groceryProducts.clear();
-        groceryProducts.addAll(groceryStockMap.keySet());
-        groceryProducts.sort((product1,product2) ->{
-            if(product1 instanceof GroceryProduct && product2 instanceof GroceryProduct){
-                String name1 = ((GroceryProduct) product1).getName().toLowerCase();
-                String name2 = ((GroceryProduct) product2).getName().toLowerCase();
-                return name1.compareTo(name2);
-            }
-            return 0;
-        });
-        textArea.append("Grocery Products: (Sorted by Name)\n");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
-        
-        for(Product product : groceryProducts){
-            Date dateAcquired = groceryStockMap.get(product);
-            textArea.append("Grocery Product - Name: " + product.getName() + ", Expiration Date: "
-                    + dateFormat.format(((GroceryProduct) product).getExpirationDate()) + ", Quantity: "
-                    + product.getQuantity() + "\n");
-        }
-        
-        //Read and display Electronics products
-        Map<Product, Date> electronicsStockMap = fileHandler.readElectronicsStock("C:\\Users\\josep\\Documents\\NetBeansProjects\\SCP2\\resources\\ElectronicsStock.txt");
-        electronicsProducts.clear();
-        electronicsProducts.addAll(electronicsStockMap.keySet());
-        electronicsProducts.sort((product1,product2) ->{
-            if(product1 instanceof ElectronicsProduct && product2 instanceof ElectronicsProduct){
-                String name1 = ((ElectronicsProduct) product1).getName().toLowerCase();
-                String name2 = ((ElectronicsProduct) product2).getName().toLowerCase();
-                return name1.compareTo(name2);
-            }
-            return 0;
-        });
-        textArea.append("\nElectronics Products: (Sorted by SKU Code)\n");
-        
-        for(Product product : electronicsProducts){
-            Date dateAcquired = electronicsStockMap.get(product);
-            if(product instanceof ElectronicsProduct){
-                textArea.append("Electronics Product - Name: " + product.getName() + ", SKU Code: "
-                        + ((ElectronicsProduct) product).getSkuCode() + ", Quantity: "
-                        + product.getQuantity() + "\n");
-            }
-        }
+       //Clear the text area before displaying new data
+       textArea.setText("");
+       
+       //Establish a database connection
+       try{
+           Connection connection = DatabaseManager.getConnection();
+           
+           //SQL query to retrieve data
+           String query = "SELECT Product_ID, Product_Name, Product_Type, Price, Quantity FROM Products";
+           
+           //Create a prepared statement
+           PreparedStatement preparedStatement = connection.prepareStatement(query);
+           
+           //Execute the query
+           ResultSet resultSet = preparedStatement.executeQuery();
+           
+           //Display the results in the text area
+           while(resultSet.next()){
+               int productID = resultSet.getInt("Product_ID");
+               String productName = resultSet.getString("Product_Name");
+               String productType = resultSet.getString("Product_Type");
+               double price = resultSet.getDouble("Price");
+               int quantity  = resultSet.getInt("Quantity");
+               
+               String result = "Product ID: " + productID + "\n" +
+                               "Product Name: " + productName + "\n" +
+                               "Product Type: " + productType + "\n" +
+                               "Price: $" + price + "\n" +
+                               "Quantity: " + quantity + "\n\n";
+               textArea.append(result);
+           }
+           
+           //Close resources
+           resultSet.close();
+           preparedStatement.close();
+       }catch(SQLException ex){
+           ex.printStackTrace();
+           textArea.setText("Error: Unable to retrieve data from the database");
+       }
     }
-    
 }
