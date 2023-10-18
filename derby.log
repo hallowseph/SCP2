@@ -1,0 +1,31 @@
+Thu Oct 19 00:05:58 NZDT 2023 : Apache Derby Network Server - 10.14.2.0 - (1828579) started and ready to accept connections on port 1527
+----------------------------------------------------------------
+Thu Oct 19 00:05:58 NZDT 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-018b-4276-b79a-ffffb52c588e 
+on database directory C:\Users\josep\Documents\NetBeansProjects\SCP2\InventoryDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2cdf8d8a 
+Loaded from file:/C:/Users/josep/db-derby-10.14.2.0-bin/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=11.0.19+9-LTS-224
+user.dir=C:\Users\josep\db-derby-10.14.2.0-bin
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=C:\Users\josep\Documents\NetBeansProjects\SCP2
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Thu Oct 19 00:05:59 NZDT 2023:
+Shutting down instance a816c00e-018b-4276-b79a-ffffb52c588e on database directory C:\Users\josep\Documents\NetBeansProjects\SCP2\InventoryDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2cdf8d8a 
+Thu Oct 19 00:05:59 NZDT 2023 Thread[DRDAConnThread_3,5,main] (DATABASE = InventoryDB), (DRDAID = {2}), Database 'InventoryDB' shutdown.
+----------------------------------------------------------------
+Thu Oct 19 00:06:11 NZDT 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance 6ede40af-018b-4276-b79a-ffffb52c588e 
+on database directory C:\Users\josep\Documents\NetBeansProjects\SCP2\InventoryDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2cdf8d8a 
+Loaded from file:/C:/Users/josep/db-derby-10.14.2.0-bin/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=11.0.19+9-LTS-224
+user.dir=C:\Users\josep\db-derby-10.14.2.0-bin
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=C:\Users\josep\Documents\NetBeansProjects\SCP2
+Database Class Loader started - derby.database.classpath=''
