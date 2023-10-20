@@ -12,3 +12,9 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=C:\Users\josep\Documents\NetBeansProjects\SCP2
 Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Fri Oct 20 23:16:52 NZDT 2023: Shutting down Derby engine
+----------------------------------------------------------------
+Fri Oct 20 23:16:52 NZDT 2023:
+Shutting down instance a816c00e-018b-4c8b-c333-ffffb52c588e on database directory C:\Users\josep\Documents\NetBeansProjects\SCP2\InventoryDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2cdf8d8a 
+----------------------------------------------------------------
