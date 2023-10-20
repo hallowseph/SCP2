@@ -29,7 +29,7 @@ public class SellProductAction implements ActionListener {
         try {
             //get user input for the product name or ID to sell
             String productIdStr = JOptionPane.showInputDialog("Enter Product ID or Name to sell:");
-            if (productIdStr == null == productIdStr.isEmpty()) {
+            if (productIdStr == null || productIdStr.isEmpty()) {
                 //if user cancels or enters an empty value
                 return;
             }
