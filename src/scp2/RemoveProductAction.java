@@ -4,6 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 
 /**
  *
@@ -11,44 +16,67 @@ import javax.swing.JTextArea;
  * @author xxg8089
  */
 public class RemoveProductAction implements ActionListener {
-
-    private InventoryManager inventoryManager;
+    private Connection connection;
     private JTextArea textArea;
 
-    public RemoveProductAction(InventoryManager inventoryManager, JTextArea textArea) {
-        this.inventoryManager = inventoryManager;
+    public RemoveProductAction(Connection connection, JTextArea textArea) {
+        this.connection = connection;
         this.textArea = textArea;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String productName = null;
-        while (true) {
-            productName = JOptionPane.showInputDialog("Enter product name to remove:");
-
-            if (productName == null) {
-                //if user cancels the input, exit the loop
-                return;
-            }
-
-            if (productName.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Product name cannot be empty.", "Input Error", JOptionPane.ERROR_MESSAGE);
-            } else if (inventoryManager.findProductByName(productName) == null) {
-                JOptionPane.showMessageDialog(null, "Product not found in stock.", "Input Error", JOptionPane.ERROR_MESSAGE);
-            } else {
-                break;//if valid product name is provided, exit loop
-            }
+        //prompt the user for the product ID or name to remove
+        String userInput = JOptionPane.showInputDialog("Enter the product ID or name to remove:");
+        if(userInput == null || userInput.isEmpty()){
+            //if user cancels or enters an empty value
+            return;
         }
-        inventoryManager.removeProduct(productName);
-
-        //Save the stock data to text files
-        inventoryManager.saveStockToFile();
-
-        //Display a message dialog to notify the user
-        JOptionPane.showMessageDialog(null,
-                productName + " removed from stock.\nGrocery stock data saved to GroceryStock.txt\nElectronics stock data saved to ElectronicsStock.txt",
-                "Product Removed",
-                JOptionPane.INFORMATION_MESSAGE);
+        
+        try{
+            //check if the product exists in the DB based on ID or name
+            String query = "SELECT * FROM Products WHERE Product_ID = ? OR Product_Name = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            int productId;
+            try{
+                //attempt to parse the input as an integer (product ID)
+                productId = Integer.parseInt(userInput);
+                preparedStatement.setInt(1, productId);
+                preparedStatement.setString(2, "");//empty string for product name
+            }catch(NumberFormatException ex){
+                //if parsing as an integer fails, treat it as a product name
+                productId = 0;
+                preparedStatement.setInt(1, productId);
+                preparedStatement.setString(2, userInput);
+            }
+            
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            if(resultSet.next()){
+                //if product exists, remove it from the DB
+                String productName = resultSet.getString("Product_Name");
+                preparedStatement.close();
+                
+                //execute DELETE statement
+                String deleteQuery = "DELETE FROM Products WHERE Product_ID = ? OR Product_Name = ?";
+                PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery);
+                deleteStatement.setInt(1, productId);
+                deleteStatement.setString(2, productName);
+                deleteStatement.executeUpdate();
+                deleteStatement.close();
+                
+                //display success message
+                JOptionPane.showMessageDialog(null, "Product '" + productName + "' removed successfully!");
+                
+            }else{
+                //product does not exist
+                preparedStatement.close();
+                JOptionPane.showMessageDialog(null, "Product not found in the inventory.");
+            }
+        } catch(SQLException ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error: Unable to remove the product. Please check your input.");
+        }
     }
 }
 
