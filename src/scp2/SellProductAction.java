@@ -4,6 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -12,75 +16,98 @@ import javax.swing.JTextArea;
  */
 public class SellProductAction implements ActionListener {
 
-    private InventoryManager inventoryManager;
+    private Connection connection;
     private JTextArea textArea;
 
-    public SellProductAction(InventoryManager inventoryManager, JTextArea textArea) {
-        this.inventoryManager = inventoryManager;
+    public SellProductAction(Connection connection, JTextArea textArea) {
+        this.connection = connection;
         this.textArea = textArea;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String productName;
-        while (true) {
-            productName = JOptionPane.showInputDialog("Enter product name to sell:");
-
-            if (productName == null) {
-                //if user cancels input, exit the loop
+        try {
+            //get user input for the product name or ID to sell
+            String productIdStr = JOptionPane.showInputDialog("Enter Product ID or Name to sell:");
+            if (productIdStr == null || productIdStr.isEmpty()) {
+                //if user cancels or enters an empty value
                 return;
             }
 
-            if (productName.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Product name cannot be empty.", "Input Error", JOptionPane.ERROR_MESSAGE);
-            } else if (isInteger(productName)) {
-                JOptionPane.showMessageDialog(null, "Product name cannot be empty.", "Input Error", JOptionPane.ERROR_MESSAGE);
-            } else {
-                break;//if valid product name, exit loop
+            //check if the entered value is a numeric product ID or a name
+            int productId = -1;
+            boolean isProductId = false;
+
+            try {
+                productId = Integer.parseInt(productIdStr);
+                isProductId = true;
+            } catch (NumberFormatException ex) {
+                //
             }
-        }
 
-        Product existingProduct = inventoryManager.findProductByName(productName);
-        if (existingProduct != null) {
-            while (true) {
-                String quantityString = JOptionPane.showInputDialog("Enter quantity to sell:");
+            //find the existing product in the DB
+            String query;
+            if (isProductId) {
+                query = "SELECT * FROM Products WHERE Product_ID = ?";
+            } else {
+                query = "SELECT * FROM Products WHERE Product_Name = ?";
+            }
 
-                if (quantityString == null) {
-                    //if user cancels the input, exit the loop
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, productIdStr);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                //product exists, get the current quantity and proceed to sell
+                int existingQuantity = resultSet.getInt("Quantity");
+                preparedStatement.close();
+
+                //get the quantity to sell
+                String quantityStr = JOptionPane.showInputDialog("Enter the quantity to sell");
+                if (quantityStr == null || quantityStr.isEmpty()) {
+                    //if user cancels or enters an empty value
                     return;
                 }
 
-                if (quantityString.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Quantity cannot be empty.", "Input Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    try {
-                        int quantity = Integer.parseInt(quantityString);
-
-                        if (quantity > 0) {
-                            inventoryManager.sellProduct(existingProduct, quantity);
-
-                            //save the stock data to the text files
-                            inventoryManager.saveStockToFile();
-                            break; //if quantity is valid, exit loop
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Quantity must be greater than 0.", "Sell Product Error", JOptionPane.ERROR_MESSAGE);
-                        }
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Invalid quantity. Please enter a valid integer.", "Sell Product Error", JOptionPane.ERROR_MESSAGE);
+                int quantityToSell;
+                try {
+                    quantityToSell = Integer.parseInt(quantityStr);
+                    if (quantityToSell <= 0 || quantityToSell > existingQuantity) {
+                        JOptionPane.showMessageDialog(null, "Invalid quantity to sell.");
+                        return;
                     }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid integer for quantity.");
+                    return;
                 }
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Product not found in stock.", "Sell Product Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
 
-    private boolean isInteger(String s) {
-        try {
-            Integer.parseInt(s);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
+                int newQuantity = existingQuantity - quantityToSell;
+
+                //update the quantity in the DB
+                String updateQuery = "UPDATE Products SET Quantity = ? WHERE ";
+                if (isProductId) {
+                    updateQuery += "Product_ID = ?";
+                } else {
+                    updateQuery += "Product_Name = ?";
+                }
+
+                PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
+                updateStatement.setInt(1, newQuantity);
+                updateStatement.setString(2, productIdStr);
+                updateStatement.executeUpdate();
+                updateStatement.close();
+
+                //display success message
+                JOptionPane.showMessageDialog(null, "Product quantity updated successfully!");
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Product not found in the iunventory.");
+            }
+        } catch (NumberFormatException | SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error: Unable to update product quantity. Please check your input.");
         }
     }
 }
+

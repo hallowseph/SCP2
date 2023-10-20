@@ -18,7 +18,6 @@ import javax.swing.JTextArea;
  */
 public class InventoryManagementSystemGUI {
     public static void main(String[] args) {
-        InventoryManager inventoryManager = new InventoryManager();
         //Main frame
         JFrame frame = new JFrame();
         frame.setTitle("Inventory Management System");
@@ -72,10 +71,10 @@ public class InventoryManagementSystemGUI {
         
         //Action listeners to the buttons
         displayButton.addActionListener(new DisplayStockAction(textArea));
-        addButton.addActionListener(new AddProductAction(inventoryManager,textArea));
-        removeButton.addActionListener(new RemoveProductAction(inventoryManager, textArea));
-        buyButton.addActionListener(new BuyProductAction(inventoryManager, textArea));
-        sellButton.addActionListener(new SellProductAction(inventoryManager, textArea));
+        addButton.addActionListener(new AddProductAction(DatabaseManager.getConnection(),textArea));
+        removeButton.addActionListener(new RemoveProductAction(DatabaseManager.getConnection(), textArea));
+        buyButton.addActionListener(new BuyProductAction(DatabaseManager.getConnection(), textArea));
+        sellButton.addActionListener(new SellProductAction(DatabaseManager.getConnection(), textArea));
         exitButton.addActionListener(new ExitAction());
         
         //Add buttons to the button panel
