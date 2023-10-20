@@ -42,6 +42,7 @@ public class BuyProductAction implements ActionListener {
                 productId = Integer.parseInt(productIdStr);
                 isProductId = true;
             }catch(NumberFormatException ex){
+                //
             }
             
             //find the product in the DB
