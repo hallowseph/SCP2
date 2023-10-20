@@ -1,7 +1,7 @@
-Fri Oct 20 23:05:10 NZDT 2023 : Apache Derby Network Server - 10.14.2.0 - (1828579) started and ready to accept connections on port 1527
+Fri Oct 20 23:29:15 NZDT 2023 : Apache Derby Network Server - 10.14.2.0 - (1828579) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Fri Oct 20 23:05:12 NZDT 2023:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-018b-4c8b-c333-ffffb52c588e 
+Fri Oct 20 23:29:15 NZDT 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-018b-4ca1-d0fb-ffffb52c588e 
 on database directory C:\Users\josep\Documents\NetBeansProjects\SCP2\InventoryDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2cdf8d8a 
 Loaded from file:/C:/Users/josep/db-derby-10.14.2.0-bin/lib/derby.jar
 java.vendor=Oracle Corporation
@@ -12,9 +12,3 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=C:\Users\josep\Documents\NetBeansProjects\SCP2
 Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Fri Oct 20 23:16:52 NZDT 2023: Shutting down Derby engine
-----------------------------------------------------------------
-Fri Oct 20 23:16:52 NZDT 2023:
-Shutting down instance a816c00e-018b-4c8b-c333-ffffb52c588e on database directory C:\Users\josep\Documents\NetBeansProjects\SCP2\InventoryDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2cdf8d8a 
-----------------------------------------------------------------
