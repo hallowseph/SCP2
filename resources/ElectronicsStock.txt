@@ -1,6 +1,0 @@
-Name,SKUCode,Quantity,DateAcquired
-Laptop,LAP123,22,Mon Jun 20 16:00:00 NZST 2022
-Smartphone,SHN456,5,Wed May 25 16:00:00 NZST 2022
-TV,TV789,0,Thu Apr 14 16:00:00 NZST 2022
-Air Fryer,AFR20,0,Mon Oct 16 00:01:11 NZDT 2023
-Keyboard,KBD230,0,Fri Oct 13 22:49:51 NZDT 2023
