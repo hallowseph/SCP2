@@ -12,7 +12,7 @@ import javax.swing.JTextArea;
 
 /**
  *
- * @author joseph,xxg8089
+ * @author hallowseph(xxg8089)
  * 
  */
 public class AddProductAction implements ActionListener {

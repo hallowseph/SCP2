@@ -5,8 +5,7 @@ import java.awt.event.ActionListener;
 
 /**
  *
- * @author joseph
- * @author xxg8089
+ * @author hallowseph(xxg8089)
  */
 public class ExitAction implements ActionListener{
 

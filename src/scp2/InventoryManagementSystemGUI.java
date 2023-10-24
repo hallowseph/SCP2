@@ -14,7 +14,7 @@ import javax.swing.JTextArea;
 
 /**
  *
- * @author xxg8089
+ * @author hallowseph(xxg8089)
  */
 public class InventoryManagementSystemGUI {
     public static void main(String[] args) {

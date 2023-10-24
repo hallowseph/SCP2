@@ -11,8 +11,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author josep
- * @author xxg8089
+ * @author hallowseph(xxg8089)
  *
  */
 public class BuyProductAction implements ActionListener {
