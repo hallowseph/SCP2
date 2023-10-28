@@ -4,8 +4,8 @@ Assignment 2 (GUI)
 
 ## BEFORE RUNNING THE InventoryManagementSystemGUI.java do these things first:
 1. Run the InitializeDatabase.java to start the DB.
-2. Then run the CreateTable.java to create the 'Products' table in the DB
-3. Then run InsertSampleProducts.java
+2. Then run the CreateTable.java to create the 'Products' table in the DB.
+3. Then run InsertSampleProducts.java to insert sample products in the stock list.
 
 ## Overview
 
