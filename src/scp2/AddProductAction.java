@@ -103,6 +103,10 @@ public class AddProductAction implements ActionListener {
             
             //Display success message
             JOptionPane.showMessageDialog(null, "Product added successfully!");
+            
+            //Call the DisplayStockAction to refresh the display
+            DisplayStockAction displayStockAction = new DisplayStockAction(textArea);
+            displayStockAction.actionPerformed(null);//Pass a dummy action event to trigger the refresh to all buttons except the display button.
         }catch(NumberFormatException | SQLException ex){
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error: Unable to add the product. Please check your input.");

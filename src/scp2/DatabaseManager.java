@@ -9,7 +9,7 @@ import java.sql.SQLException;
  * 
  */
 public class DatabaseManager {
-    private static final String DB_URL = "jdbc:derby://localhost:1527/InventoryDB;create=true;user=pdc;password=pdc";
+    private static final String DB_URL = "jdbc:derby:InventoryDB;create=true;";
     private static Connection connection;
     
     private DatabaseManager(){
