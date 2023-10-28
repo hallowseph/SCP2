@@ -8,6 +8,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -38,6 +41,26 @@ public class InventoryManagementSystemGUI {
         
         panel.add(welcomeLabel, BorderLayout.NORTH);
         
+        //Create a menu bar
+        JMenuBar menuBar = new JMenuBar();
+        
+        //Create a "File" menu
+        JMenu fileMenu = new JMenu("File");
+        
+        //Create menu items for "Main Menu" and Restart"
+        JMenuItem mainMenuMenuItem = new JMenuItem("Main Menu");
+        JMenuItem restartMenuItem = new JMenuItem("Restart");
+        
+        //Add menu items to the "File" menu
+        fileMenu.add(mainMenuMenuItem);
+        fileMenu.add(restartMenuItem);
+        
+        //Add the "File" menu to the menu bar
+        menuBar.add(fileMenu);
+        
+        //Set the manu bar for the frame
+        frame.setJMenuBar(menuBar);
+        
         //Text area for stock display
         JTextArea textArea = new JTextArea(20,40);
         textArea.setEditable(false);
@@ -52,12 +75,16 @@ public class InventoryManagementSystemGUI {
         JPanel buttonPanel = new JPanel (new GridLayout(3,3,10,10));
         panel.add(buttonPanel, BorderLayout.SOUTH);
         
+        //Add action listeners to the menu items
+        mainMenuMenuItem.addActionListener(new MainMenuAction(textArea));
+        restartMenuItem.addActionListener(new RestartAction(textArea));
+        
         //Buttons for the options
         JButton displayButton = new JButton("Display current stock");
-        JButton addButton = new JButton("Add product type");
-        JButton removeButton = new JButton("Remove product type");
-        JButton buyButton = new JButton("Buy product (Acquire more of am existing product");
-        JButton sellButton = new JButton("Sell product (Sell a relevant quantity of an existing product");
+        JButton addButton = new JButton("Add product");
+        JButton removeButton = new JButton("Remove product");
+        JButton buyButton = new JButton("Buy product");
+        JButton sellButton = new JButton("Sell product");
         JButton exitButton = new JButton("Exit program");
         
         //font for the buttons
