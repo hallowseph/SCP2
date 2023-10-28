@@ -64,12 +64,13 @@ public class RemoveProductAction implements ActionListener {
                 deleteStatement.executeUpdate();
                 deleteStatement.close();
 
-                //display success message
-                JOptionPane.showMessageDialog(null, "Product '" + productName + "' removed successfully!");
-
                 //Call the DisplayStockAction to refresh the display
                 DisplayStockAction displayStockAction = new DisplayStockAction(textArea);
                 displayStockAction.actionPerformed(null);//Pass a dummy action event to trigger the refresh to all buttons except the display button.
+
+                //display success message
+                JOptionPane.showMessageDialog(null, "Product '" + productName + "' removed successfully!");
+
             } else {
                 //product does not exist
                 preparedStatement.close();
