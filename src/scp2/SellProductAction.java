@@ -97,12 +97,13 @@ public class SellProductAction implements ActionListener {
                 updateStatement.executeUpdate();
                 updateStatement.close();
 
-                //display success message
-                JOptionPane.showMessageDialog(null, "Product quantity updated successfully!");
-
                 //Call the DisplayStockAction to refresh the display
                 DisplayStockAction displayStockAction = new DisplayStockAction(textArea);
                 displayStockAction.actionPerformed(null);//Pass a dummy action event to trigger the refresh to all buttons except the display button.
+
+                //display success message
+                JOptionPane.showMessageDialog(null, "Product quantity updated successfully!");
+
             } else {
                 JOptionPane.showMessageDialog(null, "Product not found in the iunventory.");
             }

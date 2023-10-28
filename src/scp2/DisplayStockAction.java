@@ -27,7 +27,7 @@ public class DisplayStockAction implements ActionListener {
        
        //Establish a database connection
        try{
-           Connection connection = DatabaseManager.getConnection();
+           Connection connection = DatabaseManager.getInstance().getConnection();
            
            //SQL query to retrieve data
            String query = "SELECT Product_ID, Product_Name, Product_Type, Price, Quantity FROM Products";

@@ -13,27 +13,44 @@ public class DatabaseManager {
     private static Connection connection;
     
     private DatabaseManager(){
-        //to prevent instantiation from outside
+        try{
+            connection = DriverManager.getConnection(DB_URL);
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
     
-    public static Connection getConnection(){
-        if(connection == null){
-            try{
-                connection = DriverManager.getConnection(DB_URL);
-            }catch(SQLException e){
-                e.printStackTrace();
+    //Singleton instance
+    private static DatabaseManager instance;
+    
+    //Method for getting the reference to the Singleton Object
+    public static DatabaseManager getInstance(){
+        if(instance == null){
+            synchronized(DatabaseManager.class){
+                if(instance == null){
+                    instance = new DatabaseManager();
+                }
             }
         }
+        return instance;
+    }
+    
+    public Connection getConnection(){
         return connection;
     }
     
-    public static void closeConnection(){
+    public void closeConnection(){
         if(connection != null){
             try{
-                connection.close();
+               connection.close(); 
             }catch(SQLException e){
                 e.printStackTrace();
             }
         }
+    }
+    
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        throw new CloneNotSupportedException("Singleton class, cannot be cloned.");
     }
 }
