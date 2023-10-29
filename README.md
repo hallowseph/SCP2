@@ -1,6 +1,7 @@
 # SCP2
 Assignment 2 (GUI)
 # Inventory Management System
+## ID:2113541, 19081476
 
 ## Overview
 
