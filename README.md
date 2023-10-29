@@ -2,11 +2,6 @@
 Assignment 2 (GUI)
 # Inventory Management System
 
-## BEFORE RUNNING THE InventoryManagementSystemGUI.java do these things first:
-1. Run the InitializeDatabase.java to start the DB.
-2. Then run the CreateTable.java to create the 'Products' table in the DB.
-3. Then run InsertSampleProducts.java to insert sample products in the stock list.
-
 ## Overview
 
 The Inventory Management System is a Java-based application designed to help businesses manage their product inventory. This system allows users to add, remove, buy, sell, and display products efficiently through a user-friendly Graphical User Interface (GUI).
@@ -46,7 +41,8 @@ To get started with the Inventory Management System, follow these steps:
      - "Main Menu": Return to the main menu.
      - "Restart": Restart the application.
 
-4. **Database Configuration**: The program uses an embedded Derby database that should work without manual configuration. 
+4. **Database Configuration**: The program uses an embedded Derby database that should work without manual configuration.
+   
 
 
 
