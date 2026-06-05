@@ -1,1 +1,6 @@
 /build/
+bin/
+InventoryDB/
+MockInventoryDB/
+MockInventoryDataBase/
+derby.log
